@@ -1,1 +1,3 @@
-# k8s-hands-on
+# IW2018のKubernetesハンズオンセッション用
+
+
