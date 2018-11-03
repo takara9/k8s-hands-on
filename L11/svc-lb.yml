@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: web-service-lb
+spec:
+  selector:
+    app: web
+  ports:
+  - name: webserver
+    protocol: TCP
+    port: 80
+  type: LoadBalancer  ## <-- ここにロードバランサーを指定する

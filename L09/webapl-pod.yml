@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webapl
+spec:
+  containers:
+  - name: webapl
+    image: maho/webapl:0.1    # (1)ハンドラ実装済み模擬アプリケーション
+    livenessProbe:            # (2)稼働探査
+      httpGet:
+        path: /healthz        # 稼働探査のハンドラー
+        port: 3000
+      initialDelaySeconds: 3  # 初回起動から探査開始までの猶予時間
+      periodSeconds: 5        # チェック間隔
+    readinessProbe:           # (3)準備探査
+      httpGet:
+        path: /ready          # 準備探査のハンドラー
+        port: 3000
+      initialDelaySeconds: 15
+      periodSeconds: 6

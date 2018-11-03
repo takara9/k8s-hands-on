@@ -1,0 +1,28 @@
+## サイドカー構成のサンプル
+#
+apiVersion: v1
+kind: Pod
+metadata:
+  name: webserver
+
+spec:
+  containers:          
+  - name: main        ## メイン コンテナ
+    image: nginx
+    volumeMounts:
+    - mountPath: /usr/share/nginx/html
+      name: contents-vol
+      readOnly: true
+      
+  - name: cloner      ## サイドカー コンテナ
+    image: maho/c-cloner:0.1
+    env:
+    - name: CONTENTS_SOURCE_URL
+      value: "https://github.com/takara9/web-contents"
+    volumeMounts:
+    - mountPath: /data
+      name: contents-vol
+      
+  volumes:             ## 共有ボリューム
+  - name: contents-vol
+    emptyDir: {}

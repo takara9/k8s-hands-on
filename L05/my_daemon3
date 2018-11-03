@@ -1,0 +1,39 @@
+# カウンタ初期化
+COUNT=0
+
+## 永続ボリューム   <-- 変更箇所1 この行と次行を追加
+PV=/pv/save.dat
+
+# 環境変数が無ければセット
+if [ -z "$INTERVAL" ]; then
+    INTERVAL=3
+fi
+
+# 第一引数を増分にセット、無ければデフォルト値セット
+if [ -z "$1" ]; then
+    INCREMENT_SIZE=1
+else
+    INCREMENT_SIZE=$1
+fi
+
+# 起動時に状態取得   <-- 変更箇所2 save.dat を$PVへ変更
+if [ -f $PV ]; then
+   COUNT=`cat $PV`
+   rm -f $PV
+fi
+
+# SIGTERM受信時処理  <-- 変更箇所3 save.dat を$PVへ変更
+save() {
+  echo $COUNT > $PV
+  exit
+}
+trap save TERM
+
+# メインループ
+while [ ture ];
+do
+    TM=`date|awk '{print $4}'`
+    printf "%s : %s \n" $TM $COUNT
+    let COUNT=$INCREMENT_SIZE+COUNT
+    sleep $INTERVAL
+done
