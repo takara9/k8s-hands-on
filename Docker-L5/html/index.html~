@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8" />
+<title>Welcome to nginx!</title>
+<style>
+    body {
+        width: 35em;
+        margin: 0 auto;
+        font-family: Tahoma, Verdana, Arial, sans-serif;
+    }
+</style>
+</head>
+<body>
+<h1>Docker & Kubernetes を運用の現場へ</h1>
+<p>Docker & Kubernetes を運用の現場で使って行きましょう！</p>
+<img src="https://www.docker.com/sites/default/files/vertical.png">
+<img src="https://www.vectorlogo.zone/logos/kubernetes/kubernetes-card.png">
+</body>
+</html>

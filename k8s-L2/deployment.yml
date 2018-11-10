@@ -3,7 +3,7 @@ kind: Deployment
 metadata:
   name: web-deploy
 spec:
-  replicas: 10       # <- この値を3から10へ変更
+  replicas: 3
   selector:
     matchLabels:
       app: web

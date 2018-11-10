@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: rocket
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: rocket
+  template:
+    metadata:
+      labels:
+        app: rocket
+    spec:
+      containers:
+      - name: rocket
+        image: rocket.chat
+        env:
+        - name: ROOT_URL
+          value: http://仮想サーバーのIP:31000/
+

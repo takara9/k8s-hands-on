@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mongodb
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: db
+  template:
+    metadata:
+      labels:
+        app: db
+    spec:
+      containers:
+      - name: mongodb
+        image: mongo:3.0
+        args:
+        - --smallfiles
+        volumeMounts:
+        - name: vol
+          mountPath: /data/db
+      volumes:
+      - name: vol
+        persistentVolumeClaim:
+          claimName: data1
+
